@@ -5,7 +5,9 @@ Plugin installation
 -----------
 To install the plugin copy the plugin jar (available here TODO) into the following directory:
 
-```myOpenjumpFolder\lib\ext```
+```
+myOpenjumpFolder\lib\ext
+```
 
 Now the plugin should be available when starting OpenJUMP.
 
