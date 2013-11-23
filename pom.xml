@@ -6,7 +6,6 @@
 	<packaging>jar</packaging>
 	<version>0.1-SNAPSHOT</version>
 	<name>OpenJUMP MonetDB DataStore plugin</name>
-	<url>http://maven.apache.org</url>
 
 	<repositories>
 		<repository>
@@ -47,32 +46,11 @@
 		  <version>1.13</version>
 		  <scope>compile</scope>
 		</dependency>
-	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-				  <source>1.7</source>
-				  <target>1.7</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>nl.topicus.mssql2monetdb.CopyTool</mainClass>
-						</manifest>
-					</archive>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+		<dependency>
+			<groupId>org.openjump</groupId>
+			<artifactId>OpenJUMP</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+	</dependencies>
 </project>

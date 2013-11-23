@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench>
+<extension>org.pallett.datastore.monetdb.plugin.MonetDBExtension</extension> 
+</workbench>
