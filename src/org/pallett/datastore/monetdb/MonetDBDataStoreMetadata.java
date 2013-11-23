@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.vividsolutions.jts.geom.Envelope;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKBReader;
+import com.vividsolutions.jts.io.WKTReader;
 import com.vividsolutions.jump.datastore.DataStoreMetadata;
 import com.vividsolutions.jump.datastore.GeometryColumn;
 import com.vividsolutions.jump.datastore.PrimaryKeyColumn;
@@ -17,11 +20,11 @@ import com.vividsolutions.jump.datastore.jdbc.JDBCUtil;
 import com.vividsolutions.jump.datastore.jdbc.ResultSetBlock;
 
 public class MonetDBDataStoreMetadata implements DataStoreMetadata {
-	private final WKBReader reader = new WKBReader();
-
 	private MonetDBDataStoreConnection conn;
 
 	private Map sridMap = new HashMap();
+	
+	private final WKTReader reader = new WKTReader();
 	
 	public MonetDBDataStoreMetadata (MonetDBDataStoreConnection conn) {
 		this.conn = conn;
@@ -133,8 +136,32 @@ public class MonetDBDataStoreMetadata implements DataStoreMetadata {
 
 	@Override
 	public Envelope getExtents(String datasetName, String attributeName) {
-		// TODO Auto-generated method stub
-		return null;
+		final Envelope bounds = new Envelope();
+		
+		String sql = "SELECT Envelope(\"" + attributeName + "\") FROM \"" + datasetName + "\"";
+		
+		JDBCUtil.execute(
+			conn.getConnection(), 
+			sql,
+			new ResultSetBlock() {
+				public void yield( ResultSet resultSet ) throws SQLException {
+					while ( resultSet.next() ) {
+						String wkt = resultSet.getString(1);
+						try {
+							Geometry geom = reader.read( wkt );
+							if ( geom != null ) {
+								bounds.expandToInclude(geom.getEnvelopeInternal());
+							}
+						} catch (ParseException e) {
+							// ignore
+						}
+						
+					}
+				}
+			} 
+		);
+		
+		return bounds;
 	}
 	
 	public String[] getColumnNames( String datasetName ) {
