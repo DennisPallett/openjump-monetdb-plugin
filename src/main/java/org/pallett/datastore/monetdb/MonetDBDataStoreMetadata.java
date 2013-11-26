@@ -14,7 +14,7 @@ import com.vividsolutions.jts.io.WKBReader;
 import com.vividsolutions.jts.io.WKTReader;
 import com.vividsolutions.jump.datastore.DataStoreMetadata;
 import com.vividsolutions.jump.datastore.GeometryColumn;
-import com.vividsolutions.jump.datastore.PrimaryKeyColumn;
+//import com.vividsolutions.jump.datastore.PrimaryKeyColumn;
 import com.vividsolutions.jump.datastore.SpatialReferenceSystemID;
 import com.vividsolutions.jump.datastore.jdbc.JDBCUtil;
 import com.vividsolutions.jump.datastore.jdbc.ResultSetBlock;
@@ -106,6 +106,7 @@ public class MonetDBDataStoreMetadata implements DataStoreMetadata {
 		return geometryAttributes;
 	}
 
+	/*
 	@Override
 	public List<PrimaryKeyColumn> getPrimaryKeyColumns(String datasetName) {
 		final List<PrimaryKeyColumn> identifierColumns = new ArrayList<PrimaryKeyColumn>();
@@ -132,7 +133,8 @@ public class MonetDBDataStoreMetadata implements DataStoreMetadata {
 					}
 				} );
 		return identifierColumns;
-	}
+		
+	}*/
 
 	@Override
 	public Envelope getExtents(String datasetName, String attributeName) {
