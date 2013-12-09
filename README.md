@@ -1,15 +1,7 @@
 OpenJUMP MonetDB DataStore Plugin
 =======================
 
-Plugin installation
------------
-To install the plugin copy the plugin jar (available here TODO) into the following directory:
-
-```
-myOpenjumpFolder\lib\ext
-```
-
-Now the plugin should be available when starting OpenJUMP.
+See http://dennis.pallett.nl/monetdb/monetdb-openjump-plugin/ for general download and installations instructions of this plugin. The rest of this document provides instructions for development/compilation of this plugin.
 
 Development
 -----------
